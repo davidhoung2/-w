@@ -141,7 +141,7 @@ def random_offset(p, w=40, h=20):
     return (y)
 
 
-def random_delay(x=0.1, y=0.6):
+def random_delay(x=0.4, y=0.6):
     t = random.uniform(x, y)
     time.sleep(t)
 
