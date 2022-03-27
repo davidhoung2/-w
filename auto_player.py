@@ -1,6 +1,8 @@
 import cv2, numpy, time, os, random, threading
 import pyautogui
 from winsound import Beep
+
+import win32api
 from PIL import ImageGrab
 from settings import *
 
@@ -59,12 +61,16 @@ def screen_shot():
 
 def touch(pos):
     x, y = pos
+    print(x,y)
     pt = win32api.GetCursorPos()
     pt_x = pt[0]
     pt_y = pt[1]
-    ghub.mouse_xy((x - pt_x), (y - pt_y))
+    print(pt)
+    win32api.mouse_event(0x0001, int(x - pt_x), int(y - pt_y))
+    '''ghub.mouse_xy((x - pt_x), (y - pt_y))
     ghub.mouse_down(1)
-    ghub.mouse_up(1)
+    ghub.mouse_up(1)'''
+
 
 
 def alarm(n=3):
@@ -131,13 +137,13 @@ def cut(screen, upleft, downright):
 
 
 
-def random_offset(p, w=40, h=20):
+def random_offset(p, w, h):
     a, b = p
     w, h = int(w / 3), int(h / 3)
     c, d = random.randint(-w, w), random.randint(-h, h)
     e, f = a + c, b + d
     y = [e, f]
-    return (y)
+    return y
 
 
 def random_delay(x=0.4, y=0.6):
