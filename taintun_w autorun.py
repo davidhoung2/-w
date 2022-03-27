@@ -15,14 +15,13 @@ def auto_play_w():
     mode_pos = [1196, 433]
     while True:
         if player.find_touch('fight', tap=False):
+            player.random_delay()
             xx = player.random_offset(tele_pos, 5, 5)
             player.touch(xx)
             player.random_delay()
-            time.sleep(2)
             xx = player.random_offset(setting_pos, 1, 1)
             player.touch(xx)
             player.random_delay()
-            time.sleep(1)
             xx = player.random_offset(mode_pos, 20, 20)
             player.touch(xx)
             player.random_delay()
