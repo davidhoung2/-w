@@ -1,4 +1,7 @@
 import time, os
+
+import win32api
+
 import auto_player as player
 
 
@@ -7,15 +10,15 @@ def get_pictures():
 
 
 def auto_play_w():
-    tele_pos = [1846, 994]
-    setting_pos = [33, 858]
-    mode_pos = [956, 565]
+    tele_pos = [1804, 715]
+    setting_pos = [551, 511]
+    mode_pos = [1196, 433]
     while True:
         if player.find_touch('fight', tap=False):
-            xx = player.random_offset(tele_pos, 2, 2)
+            xx = player.random_offset(tele_pos, 5, 5)
             player.touch(xx)
             player.random_delay()
-            time.sleep(1)
+            time.sleep(2)
             xx = player.random_offset(setting_pos, 1, 1)
             player.touch(xx)
             player.random_delay()
@@ -50,4 +53,7 @@ def menu(debug=False):
 
 
 if __name__ == '__main__':
+    '''while True:
+        pt = win32api.GetCursorPos()
+        print(pt)'''
     menu()
