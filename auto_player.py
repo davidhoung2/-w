@@ -56,7 +56,7 @@ def screen_shot():
     screen = cv2.imread('./screen/screen.jpg')
     return screen
 
-)
+
 def touch(pos):
     x, y = pos
     if mode == 0:
