@@ -59,13 +59,12 @@ def screen_shot():
 
 def touch(pos):
     x, y = pos
-    if mode == 0:
-        a = "adb shell input touchscreen tap {0} {1}".format(x, y)
-        os.system(a)
-    else:
-        pyautogui.moveTo(x, y)
-        pyautogui.click(x, y)
-
+    pt = win32api.GetCursorPos()
+    pt_x = pt[0]
+    pt_y = pt[1]
+    ghub.mouse_xy((x - pt_x), (y - pt_y))
+    ghub.mouse_down(1)
+    ghub.mouse_up(1)
 
 
 def alarm(n=3):
