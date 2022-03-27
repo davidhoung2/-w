@@ -61,12 +61,13 @@ def screen_shot():
 
 def touch(pos):
     x, y = pos
-    print(x,y)
-    pt = win32api.GetCursorPos()
+    #print(x,y)
+    '''pt = win32api.GetCursorPos()
     pt_x = pt[0]
     pt_y = pt[1]
-    print(pt)
-    win32api.mouse_event(0x0001, int(x - pt_x), int(y - pt_y))
+    print(pt)'''
+    pyautogui.moveTo(x, y)
+    pyautogui.click(x, y)
     '''ghub.mouse_xy((x - pt_x), (y - pt_y))
     ghub.mouse_down(1)
     ghub.mouse_up(1)'''
