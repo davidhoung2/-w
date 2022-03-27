@@ -15,6 +15,7 @@ def auto_play_w():
             xx = player.random_offset(tele_pos, 2, 2)
             player.touch(xx)
             player.random_delay()
+            time.sleep(1)
             xx = player.random_offset(setting_pos, 1, 1)
             player.touch(xx)
             player.random_delay()
