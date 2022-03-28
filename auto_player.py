@@ -1,4 +1,5 @@
 import cv2, numpy, time, os, random, threading
+import mss
 import pyautogui
 from winsound import Beep
 
@@ -44,7 +45,7 @@ def retry(func):
     return wrap_func
 
 
-def screen_shot():
+def screen_shot(monitor):
     if mode == 0:
         a = "adb shell screencap -p sdcard/screen.jpg"
         b = "adb pull sdcard/screen.jpg ./screen"
@@ -52,10 +53,8 @@ def screen_shot():
             time.sleep(0.1)
             os.system(row)
     else:  # 桌面截屏
-        screen = ImageGrab.grab()
-        screen.save('./screen/screen.jpg')
-    print('截圖已完成 ', time.ctime())
-    screen = cv2.imread('./screen/screen.jpg')
+        im = numpy.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
     return screen
 
 
@@ -101,7 +100,7 @@ def load_imgs():
 imgs = load_imgs()
 
 
-def locate(screen, wanted, show=0):
+def locate(screen, wanted, show=bool(0)):
     loc_pos = []
     wanted, treshold, c_name = wanted
     result = cv2.matchTemplate(screen, wanted, cv2.TM_CCOEFF_NORMED)
@@ -152,8 +151,8 @@ def random_delay(x=1.8, y=2.6):
     time.sleep(t)
 
 
-def find_touch(target, tap=True):
-    screen = screen_shot()
+def find_touch(target, monitor, tap=True):
+    screen = screen_shot(monitor)
     wanted = imgs[target]
     size = wanted[0].shape
     h, w, ___ = size
