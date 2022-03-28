@@ -4,17 +4,12 @@ import win32api
 
 import auto_player as player
 
-
-def get_pictures():
-    player.screen_shot()
-
-
 def auto_play_w():
     tele_pos = [1804, 715]
     setting_pos = [551, 511]
     mode_pos = [1196, 433]
     while True:
-        if player.find_touch('fight', tap=False):
+        if player.find_touch('fight', monitor, tap=False):
             player.random_delay()
             xx = player.random_offset(tele_pos, 5, 5)
             player.touch(xx)
@@ -29,8 +24,12 @@ def auto_play_w():
 
 
 def menu(debug=False):
+    global start
+    end = time.time()
+    hours, rem = divmod(end - start, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print("运行时间：{:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds))
     menu_list = [
-        [get_pictures, '屏幕截圖'],
         [auto_play_w, '自動烙幹'],
     ]
 
@@ -47,6 +46,12 @@ def menu(debug=False):
         print('已選擇功能： ' + des)
         func()
 
+upleft = (0, 0)
+downright = (1200, 700)
+a, b = upleft
+c, d = downright
+monitor = {"top": b, "left": a, "width": c, "height": d}
+start = time.time()
 
 if __name__ == '__main__':
     '''while True:
