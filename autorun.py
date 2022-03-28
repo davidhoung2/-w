@@ -47,7 +47,7 @@ def menu(debug=False):
         func()
 
 upleft = (0, 0)
-downright = (1200, 700)
+downright = (1920, 1080)
 a, b = upleft
 c, d = downright
 monitor = {"top": b, "left": a, "width": c, "height": d}
