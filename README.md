@@ -3,7 +3,6 @@
 
 把exe拖進資料夾內,然後執行
 
-complete!!!!!!!
 
 <b>goal : 
 
