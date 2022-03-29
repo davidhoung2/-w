@@ -61,9 +61,9 @@ def auto_play_w_multi():
         elif player.find_touch_multi('terminate', monitor, dist, n, tap=False):
             break
 
-        player.find_touch_multi('attack', monitor, dist, n, tap=False)
-        player.find_touch_multi('setting_960x540', monitor, dist, n, tap=True)
-        player.find_touch_multi('mode_960x540', monitor, dist, n, tap=True)
+        elif player.find_touch_multi('attack', monitor, dist, n, tap=False):
+            player.find_touch_multi('setting_960x540', monitor, dist, n, tap=True)
+            player.find_touch_multi('mode_960x540', monitor, dist, n, tap=True)
 
         t = random.uniform(1, 3)
         time.sleep(t)
