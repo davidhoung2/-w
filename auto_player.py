@@ -66,18 +66,20 @@ def touch(pos):
     pt = win32api.GetCursorPos()
     pt_x = pt[0]
     pt_y = pt[1]
+
     win32api.mouse_event(0x0001, x - pt_x, y - pt_y, 0, 0)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x - pt_x, y - pt_y, 0, 0)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x - pt_x, y - pt_y, 0, 0)
     '''
+    
     pyautogui.moveTo(x, y)
     pyautogui.click(x, y)
     '''
-    '''ghub.mouse_xy((x - pt_x), (y - pt_y))
+    '''
+    ghub.mouse_xy((x - pt_x), (y - pt_y))
     ghub.mouse_down(1)
-    ghub.mouse_up(1)'''
-
-
+    ghub.mouse_up(1)
+'''
 def alarm(n=3):
     frequency = 1500
     last = 500
@@ -166,7 +168,7 @@ def find_touch_multi(target, monitor, dist, n, tap=True):
         if tap:
             if dist < (n / 2):
                 print('左邊')
-                if xx[0] < (1920 / 2):
+                if xx[0] < (n / 2):
                     touch(xx)
                     random_delay()
 
