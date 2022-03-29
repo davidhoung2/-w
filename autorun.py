@@ -21,16 +21,17 @@ monitor = {"top": b, "left": a, "width": c, "height": d}
 # pyautogui.screenshot()
 
 def auto_play_w_multi():
-    n = int(input('輸入螢幕寬度: '))
     while True:
         im = numpy.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         wanted = player.imgs['fight_1360x765']
         dist = player.locate(screen, wanted)
         dist = numpy.array(dist)  # [[x,y]]
-        if player.find_touch_multi('fight_960x540', monitor, dist, n, tap=False):
+        if player.find_touch_multi('fight_1360x765', monitor, dist, n, tap=False):
+
             dist = dist[0]  # [x,y]
             dist = dist[0]  # 找出圖片的x座標
+
             # print(dist)
             '''t = random.uniform(0.5, 1.5)
             time.sleep(t)
@@ -48,6 +49,22 @@ def auto_play_w_multi():
             time.sleep(t)
             xx = player.random_offset(mode_pos, 100, 100)
             player.touch(xx)'''
+
+        elif player.find_touch_multi('no_response', monitor, dist, n, tap=False):
+            wanted = player.imgs['no_response']
+            dist = player.locate(screen, wanted)
+            dist = numpy.array(dist)  # [[x,y]]
+            dist = dist[0]  # [x,y]
+            dist = dist[0]  # 找出圖片的x座標
+            player.find_touch_multi('no_response', monitor, dist, n, tap=True)
+
+        elif player.find_touch_multi('terminate', monitor, dist, n, tap=False):
+            break
+
+        player.find_touch_multi('attack', monitor, dist, n, tap=False)
+        player.find_touch_multi('setting_960x540', monitor, dist, n, tap=True)
+        player.find_touch_multi('mode_960x540', monitor, dist, n, tap=True)
+
         t = random.uniform(1, 3)
         time.sleep(t)
 
@@ -85,24 +102,41 @@ def auto_play_w():
         time.sleep(t)
 
 
+def terminate():
+    player.find_touch('w', monitor, tap=True)
+    player.find_touch('start', monitor, tap=True)
+    player.find_touch('start1', monitor, tap=True)
+    player.find_touch('start_game', monitor, tap=True)
+    player.find_touch('attack', monitor, tap=False)
+    player.find_touch('setting_960x540', monitor, tap=True)
+    if player.find_touch('mode_960x540', monitor, tap=False):
+        player.find_touch('mode_960x540', monitor, tap=True)
+        return auto_play_w_multi()
+    time.sleep(3)
+
+
+
 def menu(debug=False):
     menu_list = [
-        [auto_play_w, '自動烙幹 解析度:1360x765'],
-        [auto_play_w_multi, '自動烙幹 解析度:960x540 支援多開 (左右各1個) 以螢幕中間為分割點']
+        [auto_play_w, '女兒工作囉 解析度:1360x765'],
+        [auto_play_w_multi, '女兒工作囉 解析度:960x540 支援多開 (左右各1個) 以螢幕中間為分割點']
     ]
-
+    i = 0
+    for func, des in menu_list:
+        msg = str(i) + ": " + des + '\n'
+        print(msg)
+        i += 1
+    player.alarm(1)
+    raw = input("選擇功能模式：")
+    index = int(raw)
+    func, des = menu_list[index]
+    print('已選擇功能： ' + des + '\n')
+    global n
+    n = int(input('輸入螢幕寬度: '))
     while True:
-        i = 0
-        for func, des in menu_list:
-            msg = str(i) + ": " + des + '\n'
-            print(msg)
-            i += 1
-        player.alarm(1)
-        raw = input("選擇功能模式：")
-        index = int(raw)
-        func, des = menu_list[index]
-        print('已選擇功能： ' + des + '\n')
         func()
+        while True:
+            terminate()
 
 
 if __name__ == '__main__':
