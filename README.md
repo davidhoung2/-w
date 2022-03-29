@@ -5,6 +5,6 @@
 
 complete!!!!!!!
 
-goal : 
+<b>goal : 
 
 自動回城補給
