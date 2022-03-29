@@ -55,6 +55,9 @@ def auto_play_w_multi():
         elif player.find_touch_multi('terminate', monitor, dist, n, tap=False):
             break
 
+        elif player.find_touch_multi('terminate1', monitor, dist, n, tap=False):
+            break
+
         elif player.find_touch('control', monitor, tap=False):
             player.find_touch('assist', monitor, tap=True)
             player.find_touch('setting_960x540', monitor, tap=True)
@@ -99,6 +102,7 @@ def auto_play_w():
 
 def terminate():
     player.find_touch('w', monitor, tap=True)
+    player.find_touch('w_1', monitor, tap=True)
     player.find_touch('start', monitor, tap=True)
     player.find_touch('start1', monitor, tap=True)
     player.find_touch('start_game', monitor, tap=True)
