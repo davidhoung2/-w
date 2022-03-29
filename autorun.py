@@ -21,18 +21,17 @@ monitor = {"top": b, "left": a, "width": c, "height": d}
 # pyautogui.screenshot()
 
 def auto_play_w_multi():
+    dist = 0
     while True:
-        im = numpy.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        wanted = player.imgs['fight_1360x765']
-        dist = player.locate(screen, wanted)
-        dist = numpy.array(dist)  # [[x,y]]
         if player.find_touch_multi('fight_1360x765', monitor, dist, n, tap=False):
-
+            im = numpy.array(mss.mss().grab(monitor))
+            screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+            wanted = player.imgs['fight_1360x765']
+            dist = player.locate(screen, wanted)
+            dist = numpy.array(dist)  # [[x,y]]
             dist = dist[0]  # [x,y]
             dist = dist[0]  # 找出圖片的x座標
-
-            # print(dist)
+            print(dist)
             '''t = random.uniform(0.5, 1.5)
             time.sleep(t)
             xx = player.random_offset(tele_pos, 5, 5)
@@ -50,20 +49,16 @@ def auto_play_w_multi():
             xx = player.random_offset(mode_pos, 100, 100)
             player.touch(xx)'''
 
-        elif player.find_touch_multi('no_response', monitor, dist, n, tap=False):
-            wanted = player.imgs['no_response']
-            dist = player.locate(screen, wanted)
-            dist = numpy.array(dist)  # [[x,y]]
-            dist = dist[0]  # [x,y]
-            dist = dist[0]  # 找出圖片的x座標
-            player.find_touch_multi('no_response', monitor, dist, n, tap=True)
+        elif player.find_touch('no_response', monitor, tap=False):
+            player.find_touch_multi('no_response', monitor, tap=True)
 
         elif player.find_touch_multi('terminate', monitor, dist, n, tap=False):
             break
 
-        elif player.find_touch_multi('attack', monitor, dist, n, tap=False):
-            player.find_touch_multi('setting_960x540', monitor, dist, n, tap=True)
-            player.find_touch_multi('mode_960x540', monitor, dist, n, tap=True)
+        elif player.find_touch('control', monitor, tap=False):
+            player.find_touch('assist', monitor, tap=True)
+            player.find_touch('setting_960x540', monitor, tap=True)
+            player.find_touch('mode_960x540', monitor, tap=True)
 
         t = random.uniform(1, 3)
         time.sleep(t)
