@@ -60,8 +60,19 @@ def auto_play_w_multi():
 
         elif player.find_touch('control', monitor, tap=False):
             if player.find_touch('assist', monitor, tap=False):
+                player.find_touch('assist', monitor, tap=True)
                 player.find_touch('setting_960x540', monitor, tap=True)
                 player.find_touch('mode_960x540', monitor, tap=True)
+            elif player.find_touch('assisting', monitor, tap=False):
+                player.find_touch('setting_960x540', monitor, tap=True)
+                player.find_touch('mode_960x540', monitor, tap=True)
+            elif player.find_touch('assisting_1', monitor, tap=False):
+                player.find_touch('setting_960x540', monitor, tap=True)
+                player.find_touch('mode_960x540', monitor, tap=True)
+            elif player.find_touch('assisting_2', monitor, tap=False):
+                player.find_touch('setting_960x540', monitor, tap=True)
+                player.find_touch('mode_960x540', monitor, tap=True)
+
 
         t = random.uniform(1, 3)
         time.sleep(t)
