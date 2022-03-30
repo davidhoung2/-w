@@ -117,10 +117,9 @@ def terminate():
     player.find_touch('start', monitor, tap=True)
     player.find_touch('start1', monitor, tap=True)
     player.find_touch('start_game', monitor, tap=True)
-    player.find_touch('attack', monitor, tap=False)
+    player.find_touch('assist', monitor, tap=True)
     player.find_touch('setting_960x540', monitor, tap=True)
-    if player.find_touch('mode_960x540', monitor, tap=False):
-        player.find_touch('mode_960x540', monitor, tap=True)
+    if player.find_touch('mode_960x540', monitor, tap=True):
         return auto_play_w_multi()
     time.sleep(3)
 
