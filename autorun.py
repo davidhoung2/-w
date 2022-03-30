@@ -11,12 +11,6 @@ import auto_player as player
 
 # pytesseract.pytesseract.tesseract_cmd = r"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
 
-upleft = (0, 0)
-downright = (1920, 1080)
-a, b = upleft
-c, d = downright
-monitor = {"top": b, "left": a, "width": c, "height": d}
-
 
 # pyautogui.screenshot()
 
@@ -52,10 +46,10 @@ def auto_play_w_multi():
         elif player.find_touch('no_response', monitor, tap=False):
             player.find_touch_multi('no_response', monitor, tap=True)
 
-        elif player.find_touch_multi('terminate', monitor, dist, n, tap=False):
+        elif player.find_touch_multi('terminate', monitor, dist, n, tap=False) or player.find_touch_multi('x', monitor, dist, n, tap=True):
             break
 
-        elif player.find_touch_multi('terminate1', monitor, dist, n, tap=False):
+        elif player.find_touch_multi('terminate1', monitor, dist, n, tap=False) or player.find_touch_multi('x', monitor, dist, n, tap=True):
             break
 
         elif player.find_touch('control', monitor, tap=False):
@@ -117,12 +111,11 @@ def terminate():
     player.find_touch('start', monitor, tap=True)
     player.find_touch('start1', monitor, tap=True)
     player.find_touch('start_game', monitor, tap=True)
-    player.find_touch('assist', monitor, tap=True)
-    player.find_touch('setting_960x540', monitor, tap=True)
-    if player.find_touch('mode_960x540', monitor, tap=True):
+    if player.find_touch('assist', monitor, tap=True):
+        player.find_touch('setting_960x540', monitor, tap=True)
+        player.find_touch('mode_960x540', monitor, tap=True)
         return auto_play_w_multi()
-    time.sleep(3)
-
+        time.sleep(3)
 
 
 def menu(debug=False):
@@ -140,8 +133,15 @@ def menu(debug=False):
     index = int(raw)
     func, des = menu_list[index]
     print('已選擇功能： ' + des + '\n')
-    global n
+    global n,h
     n = int(input('輸入螢幕寬度: '))
+    h = int(input('輸入螢幕高度: '))
+    upleft = (0, 0)
+    downright = (n, h)
+    a, b = upleft
+    c, d = downright
+    global monitor
+    monitor = {"top": b, "left": a, "width": c, "height": d}
     while True:
         func()
         while True:
