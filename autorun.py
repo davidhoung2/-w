@@ -51,7 +51,7 @@ def auto_play_w_multi():
                 player.find_touch('attack', monitor, tap=True)
                 player.find_touch('shop', monitor, tap=True)
                 if player.find_touch('shop_move', monitor, tap=True):
-                    time.sleep(20)
+                    time.sleep(30)
                 player.find_touch('buy', monitor, tap=True)
                 player.find_touch('buy_all', monitor, tap=True)
                 player.find_touch('exit', monitor, tap=True)
