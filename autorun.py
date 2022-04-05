@@ -315,6 +315,9 @@ def auto_play_w_multi():
                                                 time.sleep(2)
                                                 win32api.keybd_event(65, 0, win32con.KEYEVENTF_KEYUP, 0)
 
+
+
+
         elif player.find_touch('no_response', monitor, tap=True):
             return terminate()
 
@@ -367,6 +370,45 @@ def auto_play_w_multi():
                     player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
+
+        '''
+        #夢幻知島掛機
+        
+        now_time = time.strftime("%Y-%m-%d", time.localtime())
+        print(now_time)
+        now_time = Interval.between(now_time, now_time)
+        want_time = Interval.between("2022-04-06", "2022-05-01")
+        #如果時間到了
+        if now_time in want_time:
+            win32api.keybd_event(27, 0, 0, 0)
+            win32api.keybd_event(27, 0, win32con.KEYEVENTF_KEYUP, 0)
+            time.sleep(1)
+            if player.find_touch('lookup', monitor, tap=True) or player.find_touch('lookup1', monitor, tap=True):
+                player.find_touch('prison', monitor, tap=True)
+                進來之後有四種屬性選擇
+                if 按下進入風夢島:
+                    if player.find_touch('assist_1920x1080', monitor, tap=True):
+                        while not player.find_touch('setting_1920x1080', monitor, tap=True):
+                            player.find_touch('setting_1920x1080', monitor, tap=True)
+                            if player.find_touch('setting_1920x1080', monitor, tap=True):
+                                break
+                        while not player.find_touch('mode_1920x1080', monitor, tap=True):
+                            player.find_touch('mode_1920x1080', monitor, tap=True)
+                            if player.find_touch('mode_1920x1080', monitor, tap=True):
+                                break
+                elif:
+                    if player.find_touch('assist_1920x1080', monitor, tap=True):
+                            while not player.find_touch('setting_1920x1080', monitor, tap=True):
+                                player.find_touch('setting_1920x1080', monitor, tap=True)
+                                if player.find_touch('setting_1920x1080', monitor, tap=True):
+                                    break
+                            while not player.find_touch('mode_1920x1080', monitor, tap=True):
+                                player.find_touch('mode_1920x1080', monitor, tap=True)
+                                if player.find_touch('mode_1920x1080', monitor, tap=True):
+                                    break
+            
+                
+        '''
         t = random.uniform(1, 3)
         time.sleep(t)
 
@@ -403,20 +445,16 @@ def auto_play_w():
         t = random.uniform(1, 2)
         time.sleep(t)
 
-'''
-1920x1080
-缺 w_1
-response
-'''
+
 def terminate():
     while True:
         now_time = time.strftime("%Y-%m-%d", time.localtime())
         # print(now_time)
-        now_time = Interval.between(now_time, now_time)
-        want_time = Interval.between("2022-04-06", "2022-05-01")
+        #now_time = Interval.between(now_time, now_time)
+        #want_time = Interval.between("2022-04-06", "2022-05-01")
         # print(want_time)
-        if now_time not in want_time:
-            quit()
+        #if now_time not in want_time:
+        #    quit()
         player.find_touch('w_1920x1080', monitor, tap=True)
         player.find_touch('w_1', monitor, tap=True)
         player.find_touch('w_2', monitor, tap=True)
@@ -435,13 +473,13 @@ def menu(debug=False):
         #[auto_play_w, '女兒工作囉 解析度:1360x765'],
         [auto_play_w_multi, '解析度:1920x1080']
     ]
-    now_time = time.strftime("%Y-%m-%d", time.localtime())
+    #now_time = time.strftime("%Y-%m-%d", time.localtime())
     #print(now_time)
-    now_time = Interval.between(now_time, now_time)
-    want_time = Interval.between("2022-04-05", "2022-04-07")
-    if now_time not in want_time:
-        print("!!!! 時間到了 !!!!\n" + "\n喜歡的話可以再聯絡")
-        quit()
+    #now_time = Interval.between(now_time, now_time)
+    #want_time = Interval.between("2022-04-06", "2022-05-01")
+    #if now_time not in want_time:
+    #    print("!!!! 時間到了 !!!!\n" + "\n喜歡的話可以再聯絡")
+    #    quit()
     i = 0
     for func, des in menu_list:
         msg = str(i) + ": " + des + '\n'
