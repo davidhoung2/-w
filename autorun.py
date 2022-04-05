@@ -22,11 +22,11 @@ def auto_play_w_multi():
                 player.find_touch('teleport', monitor, tap=True)
                 if player.find_touch('teleport', monitor, tap=True):
                     break
-            while not player.find_touch('setting_1920x1080', monitor, tap=False):
+            while not player.find_touch('setting_1920x1080', monitor, tap=True):
                 player.find_touch('setting_1920x1080', monitor, tap=True)
                 if player.find_touch('setting_1920x1080', monitor, tap=True):
                     break
-            while not player.find_touch('mode_1920x1080', monitor, tap=False):
+            while not player.find_touch('mode_1920x1080', monitor, tap=True):
                 player.find_touch('mode_1920x1080', monitor, tap=True)
                 if player.find_touch('mode_1920x1080', monitor, tap=True):
                     break
@@ -178,8 +178,8 @@ def auto_play_w_multi():
                         if m == 5:
                             pt = win32api.GetCursorPos()
                             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, int(pt[0]), 0, 0, 0)
-                            win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int((pt[0] - 1920) * 3), 0, 0, 0)
-                            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, int((pt[0] - 1920) * 3), 0, 0, 0)
+                            win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int((pt[0] - 1920) * 3.5), 0, 0, 0)
+                            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, int((pt[0] - 1920) * 3.5), 0, 0, 0)
                             time.sleep(2)
                             player.find_touch('prison_5', monitor, tap=True)
 
@@ -204,8 +204,8 @@ def auto_play_w_multi():
                         if m == 6:
                             pt = win32api.GetCursorPos()
                             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, int(pt[0]), 0, 0, 0)
-                            win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int((pt[0] - 1920) * 3), 0, 0, 0)
-                            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, int((pt[0] - 1920) * 3), 0, 0, 0)
+                            win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int((pt[0] - 1920) * 3.5), 0, 0, 0)
+                            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, int((pt[0] - 1920) * 3.5), 0, 0, 0)
                             time.sleep(2)
                             player.find_touch('prison_6', monitor, tap=True)
 
@@ -316,54 +316,54 @@ def auto_play_w_multi():
                                                 win32api.keybd_event(65, 0, win32con.KEYEVENTF_KEYUP, 0)
 
         elif player.find_touch('no_response', monitor, tap=True):
-            break
+            return terminate()
 
         elif player.find_touch('x', monitor, tap=True):
-            break
+            return terminate()
 
         elif player.find_touch('terminate_1920x1080', monitor, tap=False):
-            break
+            return terminate()
 
         elif player.find_touch('terminate1', monitor, tap=False):
-            break
+            return terminate()
 
         elif player.find_touch('terminate2', monitor, tap=False):
-            break
+            return terminate()
 
         elif player.find_touch('mission', monitor, tap=False):
             if player.find_touch('assist_1920x1080', monitor, tap=True):
-                while not player.find_touch('setting_1920x1080', monitor, tap=False):
+                while not player.find_touch('setting_1920x1080', monitor, tap=True):
                     player.find_touch('setting_1920x1080', monitor, tap=True)
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
                         break
-                while not player.find_touch('mode_1920x1080', monitor, tap=False):
+                while not player.find_touch('mode_1920x1080', monitor, tap=True):
                     player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
             elif player.find_touch('assisting', monitor, tap=False):
-                while not player.find_touch('setting_1920x1080', monitor, tap=False):
+                while not player.find_touch('setting_1920x1080', monitor, tap=True):
                     player.find_touch('setting_1920x1080', monitor, tap=True)
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
                         break
-                while not player.find_touch('mode_1920x1080', monitor, tap=False):
+                while not player.find_touch('mode_1920x1080', monitor, tap=True):
                     player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
             elif player.find_touch('assisting_1', monitor, tap=False):
-                while not player.find_touch('setting_1920x1080', monitor, tap=False):
+                while not player.find_touch('setting_1920x1080', monitor, tap=True):
                     player.find_touch('setting_1920x1080', monitor, tap=True)
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
                         break
-                while not player.find_touch('mode_1920x1080', monitor, tap=False):
+                while not player.find_touch('mode_1920x1080', monitor, tap=True):
                     player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
             elif player.find_touch('assisting_2', monitor, tap=False):
-                while not player.find_touch('setting_1920x1080', monitor, tap=False):
+                while not player.find_touch('setting_1920x1080', monitor, tap=True):
                     player.find_touch('setting_1920x1080', monitor, tap=True)
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
                         break
-                while not player.find_touch('mode_1920x1080', monitor, tap=False):
+                while not player.find_touch('mode_1920x1080', monitor, tap=True):
                     player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
@@ -409,25 +409,24 @@ def auto_play_w():
 response
 '''
 def terminate():
-    now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    # print(now_time)
-    now_time = Interval.between(now_time, now_time)
-    start = now_time
-    want_time = Interval.between("2022-04-06 04:07:00", "2022-04-06 04:23:00")
-    # print(want_time)
-    if now_time in want_time:
-        menu()
-    else:
-        quit()
-    player.find_touch('w_1920x1080', monitor, tap=True)
-    player.find_touch('w_1', monitor, tap=True)
-    player.find_touch('start_1920x1080', monitor, tap=True)
-    player.find_touch('start_game_1920x1080', monitor, tap=True)
-    if player.find_touch('assist_1920x1080', monitor, tap=True):
-        player.find_touch('setting_1920x1080', monitor, tap=True)
-        if player.find_touch('mode_1920x1080', monitor, tap=True):
-            return auto_play_w_multi()
-    time.sleep(3)
+    while True:
+        now_time = time.strftime("%Y-%m-%d", time.localtime())
+        # print(now_time)
+        now_time = Interval.between(now_time, now_time)
+        want_time = Interval.between("2022-04-06", "2022-05-01")
+        # print(want_time)
+        if now_time not in want_time:
+            quit()
+        player.find_touch('w_1920x1080', monitor, tap=True)
+        player.find_touch('w_1', monitor, tap=True)
+        player.find_touch('w_2', monitor, tap=True)
+        player.find_touch('start_1920x1080', monitor, tap=True)
+        player.find_touch('start_game_1920x1080', monitor, tap=True)
+        if player.find_touch('assist_1920x1080', monitor, tap=True):
+            player.find_touch('setting_1920x1080', monitor, tap=True)
+            if player.find_touch('mode_1920x1080', monitor, tap=True):
+                return auto_play_w_multi()
+        time.sleep(3)
 
 
 
@@ -442,7 +441,7 @@ def menu(debug=False):
         msg = str(i) + ": " + des + '\n'
         print(msg)
         i += 1
-    player.alarm(1)
+    #player.alarm(1)
     raw = input("選擇功能模式：")
     index = int(raw)
     func, des = menu_list[index]
@@ -468,31 +467,29 @@ def menu(debug=False):
 
     s = float(input('輸入第幾層: '))
 
-
-    while True:
+    now_time = time.strftime("%Y-%m-%d", time.localtime())
+    # print(now_time)
+    now_time = Interval.between(now_time, now_time)
+    start = now_time
+    want_time = Interval.between("2022-04-06", "2022-05-01")
+    # print(want_time)
+    if now_time in want_time:
         func()
-        while True:
-            terminate()
+    else:
+        quit()
+
+
 
 
 
 
 if __name__ == '__main__':
-    now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    # print(now_time)
-    now_time = Interval.between(now_time, now_time)
-    start = now_time
-    want_time = Interval.between("2022-04-06 04:07:00", "2022-04-06 04:50:00")
-    # print(want_time)
-    if now_time in want_time:
-        menu()
-    else:
-        quit()
+
     #while True:
         #pt = player.random_x(60)
      #   pt = win32api.GetCursorPos()
      #   print(pt)
     # pyinstaller -F autorun.py
-    #menu()
+    menu()
     # img = Image.open(r"wanted/blood.png")
     # print(pytesseract.image_to_string(img, lang="eng"))
