@@ -1,10 +1,11 @@
+import datetime
 import random
 import time, os
 
+from interval import Interval
 import numpy as np
 import pyautogui
 from PIL import Image
-import pytesseract as pytesseract
 import cv2
 import mss
 import numpy
@@ -44,7 +45,7 @@ def auto_play_w_multi():
                 time.sleep(2)
                 player.find_touch('teritory', monitor, tap=True)
                 player.find_touch('home', monitor, tap=True)
-                player.find_touch('home1', monitor, tap=True)
+                player.find_touch_unrand('home1', monitor, tap=True)
                 player.find_touch('home_tp', monitor, tap=True)
                 player.find_touch('correct', monitor, tap=True)
                 time.sleep(10)
@@ -326,6 +327,9 @@ def auto_play_w_multi():
         elif player.find_touch('terminate1', monitor, tap=False):
             break
 
+        elif player.find_touch('terminate2', monitor, tap=False):
+            break
+
         elif player.find_touch('mission', monitor, tap=False):
             if player.find_touch('assist_1920x1080', monitor, tap=True):
                 while not player.find_touch('setting_1920x1080', monitor, tap=False):
@@ -405,6 +409,16 @@ def auto_play_w():
 response
 '''
 def terminate():
+    now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    # print(now_time)
+    now_time = Interval.between(now_time, now_time)
+    start = now_time
+    want_time = Interval.between("2022-04-06 04:07:00", "2022-04-06 04:23:00")
+    # print(want_time)
+    if now_time in want_time:
+        menu()
+    else:
+        quit()
     player.find_touch('w_1920x1080', monitor, tap=True)
     player.find_touch('w_1', monitor, tap=True)
     player.find_touch('start_1920x1080', monitor, tap=True)
@@ -414,6 +428,7 @@ def terminate():
         if player.find_touch('mode_1920x1080', monitor, tap=True):
             return auto_play_w_multi()
     time.sleep(3)
+
 
 
 def menu(debug=False):
@@ -432,7 +447,7 @@ def menu(debug=False):
     index = int(raw)
     func, des = menu_list[index]
     print('已選擇功能： ' + des + '\n')
-    print('李尹翔是變態 李尹翔是變態 李尹翔是變態 李尹翔是變態\n')
+
     global n, m, s, h
     #n = int(input('輸入螢幕寬度: '))
     #h = int(input('輸入螢幕高度: '))
@@ -453,17 +468,31 @@ def menu(debug=False):
 
     s = float(input('輸入第幾層: '))
 
+
     while True:
         func()
         while True:
             terminate()
 
+
+
+
 if __name__ == '__main__':
+    now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    # print(now_time)
+    now_time = Interval.between(now_time, now_time)
+    start = now_time
+    want_time = Interval.between("2022-04-06 04:07:00", "2022-04-06 04:50:00")
+    # print(want_time)
+    if now_time in want_time:
+        menu()
+    else:
+        quit()
     #while True:
         #pt = player.random_x(60)
-        #pt = win32api.GetCursorPos()
-        #print(pt)
+     #   pt = win32api.GetCursorPos()
+     #   print(pt)
     # pyinstaller -F autorun.py
-    menu()
+    #menu()
     # img = Image.open(r"wanted/blood.png")
     # print(pytesseract.image_to_string(img, lang="eng"))
