@@ -435,7 +435,13 @@ def menu(debug=False):
         #[auto_play_w, '女兒工作囉 解析度:1360x765'],
         [auto_play_w_multi, '解析度:1920x1080']
     ]
-
+    now_time = time.strftime("%Y-%m-%d", time.localtime())
+    #print(now_time)
+    now_time = Interval.between(now_time, now_time)
+    want_time = Interval.between("2022-04-05", "2022-04-07")
+    if now_time not in want_time:
+        print("!!!! 時間到了 !!!!\n" + "\n喜歡的話可以再聯絡")
+        quit()
     i = 0
     for func, des in menu_list:
         msg = str(i) + ": " + des + '\n'
@@ -476,17 +482,7 @@ def menu(debug=False):
             '選擇掛機地點: '))
 
     s = float(input('輸入第幾層: '))
-
-    now_time = time.strftime("%Y-%m-%d", time.localtime())
-    # print(now_time)
-    now_time = Interval.between(now_time, now_time)
-    start = now_time
-    want_time = Interval.between("2022-04-06", "2022-05-01")
-    # print(want_time)
-    if now_time in want_time:
-        func()
-    else:
-        quit()
+    func()
 
 
 
