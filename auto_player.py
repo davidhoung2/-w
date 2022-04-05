@@ -6,10 +6,16 @@ from winsound import Beep
 import win32api
 import win32con
 from PIL import ImageGrab
+from interval import Interval
+
 from settings import *
 
 pyautogui.PAUSE = 0.01
 
+
+
+
+# -------------------------------------------------------------------------------------------
 
 def adb_test():
     if mode == 1:
@@ -63,7 +69,7 @@ def screen_shot(monitor):
 def touch(pos):
     x, y = pos
     print(pos)
-    '''
+
     pt = win32api.GetCursorPos()
     pt_x = pt[0]
     pt_y = pt[1]
@@ -71,18 +77,18 @@ def touch(pos):
     win32api.mouse_event(0x0001, x - pt_x, y - pt_y, 0, 0)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x - pt_x, y - pt_y, 0, 0)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x - pt_x, y - pt_y, 0, 0)
-    '''
 
+'''
     pyautogui.moveTo(x, y)
     pyautogui.click(x, y)
-
-    '''
+'''
+'''
     ghub.mouse_xy((x - pt_x), (y - pt_y))
     ghub.mouse_down(1)
     ghub.mouse_up(1)
+
+
 '''
-
-
 def touch_p(pos, offset):
     x, y = pos
     print(pos)
@@ -90,10 +96,9 @@ def touch_p(pos, offset):
 
     pt_x = pt[0]
     pt_y = pt[1] - offset
-
     win32api.mouse_event(0x0001, int(x - pt_x), int(y - pt_y), 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, int(x - pt_x), int(y - pt_y), 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, int(x - pt_x), int(y - pt_y), 0, 0)
+    # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, int(x - pt_x), int(y - pt_y), 0, 0)
+    # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, int(x - pt_x), int(y - pt_y), 0, 0)
 
 
 def alarm(n=3):
@@ -258,6 +263,26 @@ def find_touch_moveleft(target, monitor, tap=True):
         return False
 
 
+# 判斷時間
+def time_todo():
+    now_time = time.strftime("%H:%M:%S", time.localtime())
+    now_time = Interval.between(now_time, now_time)
+    want_time = Interval.between("13:00:00", "17:00:00")
+    if now_time in want_time:
+        print("Yes")
+    else:
+        print("NO")
+    time.sleep(2)
+
+def time_crash():
+    now_time = time.strftime("%H:%M:%S", time.localtime())
+    now_time = Interval.between(now_time, now_time)
+    want_time = Interval.between("13:00:00", "17:00:00")
+    if now_time in want_time:
+        print("Yes")
+    else:
+        print("NO")
+    time.sleep(2)
 '''
     只偵測血瓶那一塊區域(修改monitor的範圍)
     if 找到0時:   
