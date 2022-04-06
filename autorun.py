@@ -19,15 +19,12 @@ def auto_play_w_multi():
     while True:
         if player.find_touch('fight_1920x1080', monitor, tap=False):
             while not player.find_touch('teleport', monitor, tap=True):
-                player.find_touch('teleport', monitor, tap=True)
                 if player.find_touch('teleport', monitor, tap=True):
                     break
             while not player.find_touch('setting_1920x1080', monitor, tap=True):
-                player.find_touch('setting_1920x1080', monitor, tap=True)
                 if player.find_touch('setting_1920x1080', monitor, tap=True):
                     break
             while not player.find_touch('mode_1920x1080', monitor, tap=True):
-                player.find_touch('mode_1920x1080', monitor, tap=True)
                 if player.find_touch('mode_1920x1080', monitor, tap=True):
                     break
 
@@ -336,48 +333,40 @@ def auto_play_w_multi():
         elif player.find_touch('mission', monitor, tap=False):
             if player.find_touch('assist_1920x1080', monitor, tap=True):
                 while not player.find_touch('setting_1920x1080', monitor, tap=True):
-                    player.find_touch('setting_1920x1080', monitor, tap=True)
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
                         break
                 while not player.find_touch('mode_1920x1080', monitor, tap=True):
-                    player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
             elif player.find_touch('assisting', monitor, tap=False):
                 while not player.find_touch('setting_1920x1080', monitor, tap=True):
-                    player.find_touch('setting_1920x1080', monitor, tap=True)
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
                         break
                 while not player.find_touch('mode_1920x1080', monitor, tap=True):
-                    player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
             elif player.find_touch('assisting_1', monitor, tap=False):
                 while not player.find_touch('setting_1920x1080', monitor, tap=True):
-                    player.find_touch('setting_1920x1080', monitor, tap=True)
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
                         break
                 while not player.find_touch('mode_1920x1080', monitor, tap=True):
-                    player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
             elif player.find_touch('assisting_2', monitor, tap=False):
                 while not player.find_touch('setting_1920x1080', monitor, tap=True):
-                    player.find_touch('setting_1920x1080', monitor, tap=True)
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
                         break
                 while not player.find_touch('mode_1920x1080', monitor, tap=True):
-                    player.find_touch('mode_1920x1080', monitor, tap=True)
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
 
         '''
         #夢幻知島掛機
         
-        now_time = time.strftime("%Y-%m-%d", time.localtime())
+        now_time = time.strftime("%H:%M:%S", time.localtime())
         print(now_time)
         now_time = Interval.between(now_time, now_time)
-        want_time = Interval.between("2022-04-06", "2022-05-01")
+        want_time = Interval.between("20:00:00", "21:00:00")
         #如果時間到了
         if now_time in want_time:
             win32api.keybd_event(27, 0, 0, 0)
@@ -387,27 +376,31 @@ def auto_play_w_multi():
                 player.find_touch('prison', monitor, tap=True)
                 進來之後有四種屬性選擇
                 if 按下進入風夢島:
-                    if player.find_touch('assist_1920x1080', monitor, tap=True):
-                        while not player.find_touch('setting_1920x1080', monitor, tap=True):
-                            player.find_touch('setting_1920x1080', monitor, tap=True)
-                            if player.find_touch('setting_1920x1080', monitor, tap=True):
-                                break
-                        while not player.find_touch('mode_1920x1080', monitor, tap=True):
-                            player.find_touch('mode_1920x1080', monitor, tap=True)
-                            if player.find_touch('mode_1920x1080', monitor, tap=True):
-                                break
-                elif:
-                    if player.find_touch('assist_1920x1080', monitor, tap=True):
-                            while not player.find_touch('setting_1920x1080', monitor, tap=True):
-                                player.find_touch('setting_1920x1080', monitor, tap=True)
-                                if player.find_touch('setting_1920x1080', monitor, tap=True):
-                                    break
-                            while not player.find_touch('mode_1920x1080', monitor, tap=True):
-                                player.find_touch('mode_1920x1080', monitor, tap=True)
-                                if player.find_touch('mode_1920x1080', monitor, tap=True):
-                                    break
-            
+                    time.sleep(3)
+                    while not player.find_touch('assist_1920x1080', monitor, tap=True):
+                        if player.find_touch('assist_1920x1080', monitor, tap=True):
+                            break
+                    while not player.find_touch('setting_1920x1080', monitor, tap=True):
+                        if player.find_touch('setting_1920x1080', monitor, tap=True):
+                            break
+                    while not player.find_touch('mode_1920x1080', monitor, tap=True):
+                        if player.find_touch('mode_1920x1080', monitor, tap=True):
+                            break
                 
+                elif 按下進入火夢島:
+                    time.sleep(3)
+                    while not player.find_touch('assist_1920x1080', monitor, tap=True):
+                        if player.find_touch('assist_1920x1080', monitor, tap=True):
+                            break
+                    while not player.find_touch('setting_1920x1080', monitor, tap=True):
+                        if player.find_touch('setting_1920x1080', monitor, tap=True):
+                            break
+                    while not player.find_touch('mode_1920x1080', monitor, tap=True):
+                        if player.find_touch('mode_1920x1080', monitor, tap=True):
+                            break
+        #時間過了        
+        else:
+            
         '''
         t = random.uniform(1, 3)
         time.sleep(t)
