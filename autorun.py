@@ -330,7 +330,7 @@ def auto_play_w_multi():
         elif player.find_touch('terminate2', monitor, tap=False):
             return terminate()
 
-        elif player.find_touch('mission', monitor, tap=False):
+        elif player.find_touch('lookup', monitor, tap=False) or player.find_touch('lookup1', monitor, tap=False):
             if player.find_touch('assist_1920x1080', monitor, tap=True):
                 while not player.find_touch('setting_1920x1080', monitor, tap=True):
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
