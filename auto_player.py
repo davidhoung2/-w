@@ -60,7 +60,7 @@ def screen_shot(monitor):
             time.sleep(0.1)
             os.system(row)
     else:  # 桌面截屏
-        print(time.ctime())
+        #print(time.ctime())
         im = numpy.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
     return screen
@@ -68,35 +68,33 @@ def screen_shot(monitor):
 
 def touch(pos):
     x, y = pos
-    print(pos)
+    #print(pos)
 
-    pt = win32api.GetCursorPos()
-    pt_x = pt[0]
-    pt_y = pt[1]
-
-    win32api.mouse_event(0x0001, x - pt_x, y - pt_y, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x - pt_x, y - pt_y, 0, 0)
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x - pt_x, y - pt_y, 0, 0)
-
-'''
+    #pt = win32api.GetCursorPos()
+    #pt_x = pt[0]
+    #pt_y = pt[1]
     pyautogui.moveTo(x, y)
     pyautogui.click(x, y)
 '''
+    win32api.mouse_event(0x0001, x - pt_x, y - pt_y, 0, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x - pt_x, y - pt_y, 0, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x - pt_x, y - pt_y, 0, 0)
+'''
+
+
+
 '''
     ghub.mouse_xy((x - pt_x), (y - pt_y))
     ghub.mouse_down(1)
     ghub.mouse_up(1)
-
-
 '''
 def touch_p(pos, offset):
     x, y = pos
-    print(pos)
-    pt = win32api.GetCursorPos()
-
-    pt_x = pt[0]
-    pt_y = pt[1] - offset
-    win32api.mouse_event(0x0001, int(x - pt_x), int(y - pt_y), 0, 0)
+    #print(pos)
+    #pt = win32api.GetCursorPos()
+    y = y + offset
+    pyautogui.moveTo(x, y)
+    pyautogui.click(x, y)
     # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, int(x - pt_x), int(y - pt_y), 0, 0)
     # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, int(x - pt_x), int(y - pt_y), 0, 0)
 
@@ -178,7 +176,7 @@ def left_offset(p):
     return y
 
 
-def random_delay(x=2, y=2.5):
+def random_delay(x=1.5, y=1.7):
     t = random.uniform(x, y)
     time.sleep(t)
 
@@ -190,6 +188,8 @@ def find_touch_multi(target, monitor, dist, n, tap=True):
     h, w, ___ = size
     pts = locate(screen, wanted)
     if pts:
+        now_time = time.strftime("%H:%M:%S", time.localtime())
+        print(now_time)
         print('Y 已找到目標', target)
         xx = pts[0]
         xx = random_offset(xx, w, h)
@@ -218,6 +218,8 @@ def find_touch(target, monitor, tap=True):
     h, w, ___ = size
     pts = locate(screen, wanted)
     if pts:
+        now_time = time.strftime("%H:%M:%S", time.localtime())
+        print(now_time)
         print('Y 已找到目標', target)
         xx = pts[0]
         xx = random_offset(xx, w, h)
@@ -226,7 +228,7 @@ def find_touch(target, monitor, tap=True):
             random_delay()
         return xx
     else:
-        print('N 未找到目標 ', target)
+        #print('N 未找到目標 ', target)
         return False
 
 
@@ -235,6 +237,8 @@ def find_touch_unrand(target, monitor, tap=True):
     wanted = imgs[target]
     pts = locate(screen, wanted)
     if pts:
+        now_time = time.strftime("%H:%M:%S", time.localtime())
+        print(now_time)
         print('Y 已找到目標', target)
         xx = pts[0]
         if tap:
@@ -242,7 +246,7 @@ def find_touch_unrand(target, monitor, tap=True):
             random_delay()
         return xx
     else:
-        print('N 未找到目標 ', target)
+        #print('N 未找到目標 ', target)
         return False
 
 
@@ -251,6 +255,8 @@ def find_touch_moveleft(target, monitor, tap=True):
     wanted = imgs[target]
     pts = locate(screen, wanted)
     if pts:
+        now_time = time.strftime("%H:%M:%S", time.localtime())
+        print(now_time)
         print('Y 已找到目標', target)
         xx = pts[0]
         xx = left_offset(xx)
@@ -259,7 +265,7 @@ def find_touch_moveleft(target, monitor, tap=True):
             random_delay()
         return xx
     else:
-        print('N 未找到目標 ', target)
+        #print('N 未找到目標 ', target)
         return False
 
 
@@ -291,4 +297,18 @@ def time_crash():
         else:
             做後續回程買藥的動作
         
+'''
+'''
+古魯丁四樓被打
+飛走
+地監
+移動到2-3
+省電
+
+
+2-3被打
+飛走
+地監
+4樓
+省電
 '''
