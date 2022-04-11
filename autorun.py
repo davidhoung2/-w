@@ -1,6 +1,6 @@
 import datetime
 import random
-import time, os
+import time
 
 from interval import Interval
 import numpy as np
@@ -8,7 +8,6 @@ import pyautogui
 from PIL import Image
 import cv2
 import mss
-import numpy
 import win32api
 import win32con
 import auto_player as player
@@ -183,13 +182,56 @@ def prison_move(area , floor):
                                 break
 
                 if floor == 3:
+                    ss = 2
                     if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
                         go = player.find_touch('move_prison', monitor, tap=False)
-                        y = select_move * (floor - 1)
+                        y = select_move * (ss - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
                             if player.find_touch('correct', monitor, tap=True):
                                 break
+
+                        time.sleep(2)
+                        if player.find_touch('assisting', monitor, tap=True) or player.find_touch(
+                                'assisting_2', monitor, tap=True):
+                            player.find_touch('assist', monitor, tap=True)
+
+                        while not player.find_touch('small_map_5', monitor, tap=True):
+                            if player.find_touch('small_map_5', monitor, tap=True):
+                                break
+                        time.sleep(2)
+                        # 移動到位置
+                        while not player.find_touch('flag_5', monitor, tap=True):
+                            if player.find_touch('flag_5', monitor, tap=True):
+                                break
+
+                        while not player.find_touch('move_5', monitor, tap=True):
+                            if player.find_touch('move_5', monitor, tap=True):
+                                break
+
+                        time.sleep(80)
+                        win32api.keybd_event(65, 0, 0, 0)
+                        time.sleep(1)
+                        win32api.keybd_event(65, 0, win32con.KEYEVENTF_KEYUP, 0)
+                        win32api.keybd_event(87, 0, 0, 0)
+                        time.sleep(1)
+                        win32api.keybd_event(87, 0, win32con.KEYEVENTF_KEYUP, 0)
+                        for i in range(5):
+                            if player.find_touch('transport_door_44', monitor, tap=True):
+                                break
+                            else:
+                                player.find_touch('small_map_6', monitor, tap=True)
+                                time.sleep(2)
+                                # 移動到位置
+                                player.find_touch('flag_5', monitor, tap=True)
+                                player.find_touch('move_4', monitor, tap=True)
+                                time.sleep(40)
+                                win32api.keybd_event(65, 0, 0, 0)
+                                time.sleep(1)
+                                win32api.keybd_event(65, 0, win32con.KEYEVENTF_KEYUP, 0)
+                                win32api.keybd_event(87, 0, 0, 0)
+                                time.sleep(1)
+                                win32api.keybd_event(87, 0, win32con.KEYEVENTF_KEYUP, 0)
 
             if area == 6:
                 pt = win32api.GetCursorPos()
@@ -328,6 +370,8 @@ def prison_move(area , floor):
 def auto_play_w_multi():
     flag = 0
     while True:
+        if win32api.GetAsyncKeyState(0x23):
+            break
         x = random.randint(1, 4)
         if player.find_touch('fight_1920x1080', monitor, tap=False):
             flag = flag + x
@@ -351,7 +395,7 @@ def auto_play_w_multi():
 
 
         # 如果偵測到沒有紅藥水
-        elif player.find_touch('zero', monitor, tap=False):
+        elif player.find_touch('zero', monitor, tap=False) or player.find_touch('zero_1', monitor, tap=False):
             win32api.keybd_event(27, 0, 0, 0)
             win32api.keybd_event(27, 0, win32con.KEYEVENTF_KEYUP, 0)
             time.sleep(1)
@@ -360,35 +404,24 @@ def auto_play_w_multi():
                 if player.find_touch_moveleft('home_map1', monitor, tap=False):
                     break
             time.sleep(2)
-            player.find_touch('teritory', monitor, tap=True)
-            player.find_touch('home', monitor, tap=True)
-            player.find_touch_unrand('home1', monitor, tap=True)
-            player.find_touch('home_tp', monitor, tap=True)
+            player.find_touch('teritory', monitor, tap=True)\
+                or player.find_touch('teritory_1', monitor, tap=True)
+            player.find_touch('home', monitor, tap=True) \
+                or player.find_touch('home_1', monitor, tap=True)
+            player.find_touch_unrand('home1', monitor, tap=True) \
+                or player.find_touch_unrand('home1_1', monitor, tap=True)
+            player.find_touch('home_tp', monitor, tap=True) \
+                or player.find_touch('home_tp_1', monitor, tap=True)
             player.find_touch('correct', monitor, tap=True)
             time.sleep(10)
             player.find_touch('attack', monitor, tap=True)
             player.find_touch('shop', monitor, tap=True)
             if player.find_touch('shop_move', monitor, tap=True):
-                time.sleep(30)
+                time.sleep(20)
             player.find_touch('buy', monitor, tap=True)
             player.find_touch('buy_all', monitor, tap=True)
             player.find_touch('exit', monitor, tap=True)
-            prison_move(s, m)
-
-        elif player.find_touch('no_response', monitor, tap=True):
-            return terminate()
-
-        elif player.find_touch('x', monitor, tap=True):
-            return terminate()
-
-        elif player.find_touch('terminate_1920x1080', monitor, tap=False):
-            return terminate()
-
-        elif player.find_touch('terminate1', monitor, tap=False):
-            return terminate()
-
-        elif player.find_touch('terminate2', monitor, tap=False):
-            return terminate()
+            prison_move(m, s)
 
         elif player.find_touch('lookup', monitor, tap=False) or player.find_touch('lookup1', monitor, tap=False):
             if player.find_touch_unrand('assist_1920x1080', monitor, tap=False):
@@ -401,6 +434,18 @@ def auto_play_w_multi():
                     while not player.find_touch('mode_1920x1080', monitor, tap=True):
                         if player.find_touch('mode_1920x1080', monitor, tap=True):
                             break
+
+            if player.find_touch_unrand('assist_2', monitor, tap=False):
+                if not player.find_touch_unrand('assisting_2', monitor, tap=False) \
+                        or not player.find_touch_unrand('assisting_1', monitor, tap=False):
+                    player.find_touch_unrand('assist_2', monitor, tap=True)
+                    while not player.find_touch('setting_1920x1080', monitor, tap=True):
+                        if player.find_touch('setting_1920x1080', monitor, tap=True):
+                            break
+                    while not player.find_touch('mode_1920x1080', monitor, tap=True):
+                        if player.find_touch('mode_1920x1080', monitor, tap=True):
+                            break
+
             elif player.find_touch_unrand('assisting', monitor, tap=False):
                 while not player.find_touch('setting_1920x1080', monitor, tap=True):
                     if player.find_touch('setting_1920x1080', monitor, tap=True):
@@ -422,6 +467,30 @@ def auto_play_w_multi():
                 while not player.find_touch('mode_1920x1080', monitor, tap=True):
                     if player.find_touch('mode_1920x1080', monitor, tap=True):
                         break
+            elif player.find_touch_unrand('assisting_3', monitor, tap=False):
+                while not player.find_touch('setting_1920x1080', monitor, tap=True):
+                    if player.find_touch('setting_1920x1080', monitor, tap=True):
+                        break
+                while not player.find_touch('mode_1920x1080', monitor, tap=True):
+                    if player.find_touch('mode_1920x1080', monitor, tap=True):
+                        break
+
+        elif x == 3:
+            if player.find_touch('x', monitor, tap=True):
+                return terminate()
+
+            elif player.find_touch('no_response', monitor, tap=True):
+                return terminate()
+
+            elif player.find_touch('terminate_1920x1080', monitor, tap=False):
+                return terminate()
+
+            elif player.find_touch('terminate1', monitor, tap=False):
+                return terminate()
+
+            elif player.find_touch('terminate2', monitor, tap=False):
+                return terminate()
+
 
         '''
         #夢幻知島掛機
@@ -465,8 +534,10 @@ def auto_play_w_multi():
         else:
             
         '''
-        t = random.uniform(0.3, 0.8)
+
+        t = random.uniform(1, 1.5)
         time.sleep(t)
+
 
 
 def terminate():
@@ -483,11 +554,9 @@ def terminate():
         player.find_touch('w_2', monitor, tap=True)
         player.find_touch('start_1920x1080', monitor, tap=True)
         player.find_touch('start_game_1920x1080', monitor, tap=True)
-        if player.find_touch('assist_1920x1080', monitor, tap=True):
-            player.find_touch('setting_1920x1080', monitor, tap=True)
-            if player.find_touch('mode_1920x1080', monitor, tap=True):
-                return auto_play_w_multi()
-        time.sleep(3)
+        time.sleep(6)
+        return auto_play_w_multi()
+
 
 
 
@@ -549,16 +618,10 @@ def menu(debug=False):
 
 
 
-
-
-
 if __name__ == '__main__':
 
-    #while True:
-        #pt = player.random_x(60)
-     #   pt = win32api.GetCursorPos()
-     #   print(pt)
     # pyinstaller -F autorun.py
     menu()
-    # img = Image.open(r"wanted/blood.png")
-    # print(pytesseract.image_to_string(img, lang="eng"))
+    debug = 1
+    while debug:
+        menu()
