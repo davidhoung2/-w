@@ -17,9 +17,11 @@ def prison_move(area , floor):
     if player.find_touch('lookup', monitor, tap=True) or player.find_touch('lookup1', monitor, tap=True):
         if player.find_touch('prison', monitor, tap=True):
             if area == 1:
-                player.find_touch('prison_1', monitor, tap=True)
+                while not player.find_touch('prison_1', monitor, tap=True):
+                    if player.find_touch('prison_1', monitor, tap=True):
+                        break
                 if floor == 1:
-                    player.find_touch('move_prison', monitor, tap=True)
+                    player.find_touch_unrand('move_prison', monitor, tap=True)
                     while not player.find_touch('correct', monitor, tap=True):
                         if player.find_touch('correct', monitor, tap=True):
                             break
@@ -40,7 +42,9 @@ def prison_move(area , floor):
                             if player.find_touch('correct', monitor, tap=True):
                                 break
             if area == 2:
-                player.find_touch('prison_2', monitor, tap=True)
+                while not player.find_touch('prison_2', monitor, tap=True):
+                    if player.find_touch('prison_2', monitor, tap=True):
+                        break
                 if floor == 1:
                     player.find_touch('move_prison', monitor, tap=True)
                     while not player.find_touch('correct', monitor, tap=True):
@@ -55,46 +59,50 @@ def prison_move(area , floor):
                             if player.find_touch('correct', monitor, tap=True):
                                 break
             if area == 3:
-                player.find_touch('prison_3', monitor, tap=True)
+                while not player.find_touch('prison_3', monitor, tap=True):
+                    if player.find_touch('prison_3', monitor, tap=True):
+                        break
                 if floor == 1:
-                    player.find_touch('move_prison', monitor, tap=True)
+                    player.find_touch_unrand('move_prison', monitor, tap=True)
                     while not player.find_touch('correct', monitor, tap=True):
                         if player.find_touch('correct', monitor, tap=True):
                             break
                 if floor == 2:
                     if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
                             if player.find_touch('correct', monitor, tap=True):
                                 break
                 if floor == 3:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
                             if player.find_touch('correct', monitor, tap=True):
                                 break
             if area == 4:
-                player.find_touch('prison_4', monitor, tap=True)
+                while not player.find_touch('prison_4', monitor, tap=True):
+                    if player.find_touch('prison_4', monitor, tap=True):
+                        break
                 if floor == 1:
-                    player.find_touch('move_prison', monitor, tap=True)
+                    player.find_touch_unrand('move_prison', monitor, tap=True)
                     while not player.find_touch('correct', monitor, tap=True):
                         if player.find_touch('correct', monitor, tap=True):
                             break
                 if floor == 2:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
                             if player.find_touch('correct', monitor, tap=True):
                                 break
                 if floor == 3:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
@@ -113,8 +121,8 @@ def prison_move(area , floor):
                     repeat 1~4 
                 '''
                 if floor == 4:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 2)
                         player.touch_p(go, y)  # 傳到第三層
                         time.sleep(1)
@@ -126,55 +134,114 @@ def prison_move(area , floor):
                                                                                                   monitor, tap=True):
                             player.find_touch('assist', monitor, tap=True)
 
-                        player.find_touch('small_map_4', monitor, tap=True)
+                        player.find_touch_moveleft('home_map1', monitor, tap=True)
                         time.sleep(2)
                         # 移動到位置
                         player.find_touch('flag_4', monitor, tap=True)
-                        player.find_touch('move_4', monitor, tap=True)
-                        time.sleep(45)
+                        player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
+                        time.sleep(60)
                         win32api.keybd_event(68, 0, 0, 0)
-                        time.sleep(2)
+                        time.sleep(3)
                         win32api.keybd_event(68, 0, win32con.KEYEVENTF_KEYUP, 0)
                         for i in range(5):
                             if player.find_touch('transport_door_44', monitor, tap=True):
                                 break
                             else:
-                                player.find_touch('small_map_4', monitor, tap=True)
+                                player.find_touch_moveleft('home_map1', monitor, tap=True)
                                 time.sleep(2)
                                 player.find_touch('flag_4', monitor, tap=True)
-                                player.find_touch('move_4', monitor, tap=True)
+                                player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
                                 time.sleep(10)
                                 win32api.keybd_event(68, 0, 0, 0)
                                 time.sleep(2)
                                 win32api.keybd_event(68, 0, win32con.KEYEVENTF_KEYUP, 0)
-                '''if s == 5:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
-                        y = player.random_simple(select_move * (s - 1))
-                        player.touch_p(go, y)
-                        player.find_touch('small_map_4', monitor, tap=True)
-                if s == 6:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
-                        y = player.random_simple(select_move * (s - 1))
-                        player.touch_p(go, y)'''
+                if floor == 5:
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
+                        y = select_move * (floor - 3)
+                        player.touch_p(go, y)  # 傳到第三層
+                        time.sleep(1)
+                        while not player.find_touch('correct', monitor, tap=True):
+                            if player.find_touch('correct', monitor, tap=True):
+                                break
+                        time.sleep(2)
+                        if player.find_touch('assisting', monitor, tap=True) or player.find_touch('assisting_2',
+                                                                                                  monitor, tap=True):
+                            player.find_touch('assist', monitor, tap=True)
+
+                        player.find_touch_moveleft('home_map1', monitor, tap=True)
+                        time.sleep(2)
+                        # 移動到位置
+                        while not player.find_touch('flag_4', monitor, tap=True):
+                            if player.find_touch('flag_4', monitor, tap=True):
+                                break
+
+                        player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
+                        time.sleep(60)
+                        win32api.keybd_event(68, 0, 0, 0)
+                        time.sleep(3)
+                        win32api.keybd_event(68, 0, win32con.KEYEVENTF_KEYUP, 0)
+                        for i in range(5):
+                            if player.find_touch('transport_door_44', monitor, tap=True):
+                                break
+                            else:
+                                player.find_touch_moveleft('home_map1', monitor, tap=True)
+                                time.sleep(2)
+                                player.find_touch('flag_4', monitor, tap=True)
+                                player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
+                                time.sleep(10)
+                                win32api.keybd_event(68, 0, 0, 0)
+                                time.sleep(2)
+                                win32api.keybd_event(68, 0, win32con.KEYEVENTF_KEYUP, 0)
+                        #-------第四層到第五層----------
+                        if player.find_touch('assisting', monitor, tap=True) or player.find_touch('assisting_2',
+                                                                                                  monitor, tap=True):
+                            player.find_touch('assist', monitor, tap=True)
+
+                        player.find_touch_moveleft('home_map1', monitor, tap=True)
+                        time.sleep(2)
+                        # 移動到位置
+                        while not player.find_touch('flag_41', monitor, tap=True):
+                            if player.find_touch('flag_41', monitor, tap=True):
+                                break
+
+                        player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
+                        time.sleep(38)
+                        win32api.keybd_event(65, 0, 0, 0)
+                        time.sleep(2)
+                        win32api.keybd_event(65, 0, win32con.KEYEVENTF_KEYUP, 0)
+                        for i in range(5):
+                            if player.find_touch('transport_door_44', monitor, tap=True):
+                                break
+                            else:
+                                player.find_touch_moveleft('home_map1', monitor, tap=True)
+                                time.sleep(2)
+                                player.find_touch('flag_4', monitor, tap=True)
+                                player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
+                                time.sleep(10)
+                                win32api.keybd_event(68, 0, 0, 0)
+                                time.sleep(2)
+                                win32api.keybd_event(68, 0, win32con.KEYEVENTF_KEYUP, 0)
+
             if area == 5:
                 pt = win32api.GetCursorPos()
                 win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, int(pt[0]), 0, 0, 0)
                 win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int((pt[0] - 1920) * 3.5), 0, 0, 0)
                 win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, int((pt[0] - 1920) * 3.5), 0, 0, 0)
                 time.sleep(2)
-                player.find_touch('prison_5', monitor, tap=True)
+                while not player.find_touch('prison_5', monitor, tap=True):
+                    if player.find_touch('prison_5', monitor, tap=True):
+                        break
 
                 if floor == 1:
-                    player.find_touch('move_prison', monitor, tap=True)
+                    player.find_touch_unrand('move_prison', monitor, tap=True)
                     while not player.find_touch('correct', monitor, tap=True):
                         if player.find_touch('correct', monitor, tap=True):
                             break
 
                 if floor == 2:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
@@ -183,8 +250,8 @@ def prison_move(area , floor):
 
                 if floor == 3:
                     ss = 2
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (ss - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
@@ -205,11 +272,11 @@ def prison_move(area , floor):
                             if player.find_touch('flag_5', monitor, tap=True):
                                 break
 
-                        while not player.find_touch('move_5', monitor, tap=True):
-                            if player.find_touch('move_5', monitor, tap=True):
+                        while not player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True):
+                            if player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True):
                                 break
 
-                        time.sleep(80)
+                        time.sleep(70)
                         win32api.keybd_event(65, 0, 0, 0)
                         time.sleep(1)
                         win32api.keybd_event(65, 0, win32con.KEYEVENTF_KEYUP, 0)
@@ -224,7 +291,7 @@ def prison_move(area , floor):
                                 time.sleep(2)
                                 # 移動到位置
                                 player.find_touch('flag_5', monitor, tap=True)
-                                player.find_touch('move_4', monitor, tap=True)
+                                player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
                                 time.sleep(40)
                                 win32api.keybd_event(65, 0, 0, 0)
                                 time.sleep(1)
@@ -242,14 +309,14 @@ def prison_move(area , floor):
                 player.find_touch('prison_6', monitor, tap=True)
 
                 if floor == 1:
-                    player.find_touch('move_prison', monitor, tap=True)
+                    player.find_touch_unrand('move_prison', monitor, tap=True)
                     while not player.find_touch('correct', monitor, tap=True):
                         if player.find_touch('correct', monitor, tap=True):
                             break
 
                 if floor == 2:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
@@ -258,16 +325,16 @@ def prison_move(area , floor):
 
                 if floor == 1.3:
                     ss = 3
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (ss - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
                             if player.find_touch('correct', monitor, tap=True):
                                 break
                 if floor == 4:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
@@ -275,8 +342,8 @@ def prison_move(area , floor):
                                 break
 
                 if floor == 5:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
@@ -284,8 +351,8 @@ def prison_move(area , floor):
                                 break
 
                 if floor == 6:
-                    if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                        go = player.find_touch('move_prison', monitor, tap=False)
+                    if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                        go = player.find_touch_unrand('move_prison', monitor, tap=False)
                         y = select_move * (floor - 1)
                         player.touch_p(go, y)
                         while not player.find_touch('correct', monitor, tap=True):
@@ -295,15 +362,15 @@ def prison_move(area , floor):
                 if floor > 6 or floor == 3:
                     pt = [int(1920 / 2), int(910)]
                     win32api.SetCursorPos(pt)
-                    time.sleep(1)
+                    time.sleep(1.5)
                     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
                     win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 0, int((pt[0] - 1080) * 4), 0, 0)
                     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, int((pt[0] - 1080) * 4), 0, 0)
                     time.sleep(2)
                     if floor == 21:
                         ss = 3
-                        if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                            go = player.find_touch('move_prison', monitor, tap=False)
+                        if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                            go = player.find_touch_unrand('move_prison', monitor, tap=False)
                             y = select_move * (ss - 1)
                             player.touch_p(go, y)
                             while not player.find_touch('correct', monitor, tap=True):
@@ -312,8 +379,8 @@ def prison_move(area , floor):
 
                     if floor == 22:
                         ss = 4
-                        if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                            go = player.find_touch('move_prison', monitor, tap=False)
+                        if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                            go = player.find_touch_unrand('move_prison', monitor, tap=False)
                             y = select_move * (ss - 1)
                             player.touch_p(go, y)
                             while not player.find_touch('correct', monitor, tap=True):
@@ -322,8 +389,8 @@ def prison_move(area , floor):
 
                     if floor == 23:
                         ss = 5
-                        if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                            go = player.find_touch('move_prison', monitor, tap=False)
+                        if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                            go = player.find_touch_unrand('move_prison', monitor, tap=False)
                             y = select_move * (ss - 1)
                             player.touch_p(go, y)
                             while not player.find_touch('correct', monitor, tap=True):
@@ -332,8 +399,8 @@ def prison_move(area , floor):
 
                     if floor == 3:
                         ss = 5
-                        if player.find_touch('move_prison', monitor, tap=False):  # 找到箭頭
-                            go = player.find_touch('move_prison', monitor, tap=False)
+                        if player.find_touch_unrand('move_prison', monitor, tap=False):  # 找到箭頭
+                            go = player.find_touch_unrand('move_prison', monitor, tap=False)
                             y = select_move * (ss - 1)
                             player.touch_p(go, y)  # 傳到第三層
                             time.sleep(1)
@@ -348,8 +415,10 @@ def prison_move(area , floor):
                             player.find_touch('small_map_6', monitor, tap=True)
                             time.sleep(2)
                             # 移動到位置
-                            player.find_touch('flag_6', monitor, tap=True)
-                            player.find_touch('move_4', monitor, tap=True)
+                            while not player.find_touch('flag_6', monitor, tap=True):
+                                if player.find_touch('flag_6', monitor, tap=True):
+                                    break
+                            player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
                             time.sleep(30)
                             win32api.keybd_event(65, 0, 0, 0)
                             time.sleep(2)
@@ -360,8 +429,10 @@ def prison_move(area , floor):
                                 else:
                                     player.find_touch('small_map_4', monitor, tap=True)
                                     time.sleep(2)
-                                    player.find_touch('flag_6', monitor, tap=True)
-                                    player.find_touch('move_4', monitor, tap=True)
+                                    while not player.find_touch('flag_6', monitor, tap=True):
+                                        if player.find_touch('flag_6', monitor, tap=True):
+                                            break
+                                    player.find_touch('move_4', monitor, tap=True) or player.find_touch('move_5', monitor, tap=True)
                                     time.sleep(10)
                                     win32api.keybd_event(65, 0, 0, 0)
                                     time.sleep(2)
@@ -373,6 +444,7 @@ def auto_play_w_multi():
         if win32api.GetAsyncKeyState(0x23):
             break
         x = random.randint(1, 4)
+
         if player.find_touch('fight_1920x1080', monitor, tap=False):
             flag = flag + x
             print("王八蛋來了!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -384,18 +456,13 @@ def auto_play_w_multi():
                 prison_move(4, 4)
             else:
                 prison_move(6, 23)
-            '''
-            while not player.find_touch('setting_1920x1080', monitor, tap=True):
-                if player.find_touch('setting_1920x1080', monitor, tap=True):
-                    break
-            while not player.find_touch('mode_1920x1080', monitor, tap=True):
-                if player.find_touch('mode_1920x1080', monitor, tap=True):
-                    break
-            '''
+        
+
 
 
         # 如果偵測到沒有紅藥水
-        elif player.find_touch('zero', monitor, tap=False) or player.find_touch('zero_1', monitor, tap=False):
+        #elif player.find_touch('zero', monitor, tap=False) or player.find_touch('zero_1', monitor, tap=False):
+        elif float(player.PerOfBlood()) < 0.7:
             win32api.keybd_event(27, 0, 0, 0)
             win32api.keybd_event(27, 0, win32con.KEYEVENTF_KEYUP, 0)
             time.sleep(1)
@@ -614,14 +681,14 @@ def menu(debug=False):
 
     s = float(input('輸入第幾層: '))
     print("開始偵測了 :)")
+
     func()
 
 
 
 if __name__ == '__main__':
-
-    # pyinstaller -F autorun.py
+    #pyinstaller -F autorun.py
+    #menu()
+    #debug = 1
+    #while debug:
     menu()
-    debug = 1
-    while debug:
-        menu()
