@@ -1,5 +1,6 @@
 import cv2, numpy, time, os, random, threading
 import mss
+import numpy as np
 import pyautogui
 from winsound import Beep
 
@@ -11,8 +12,6 @@ from interval import Interval
 from settings import *
 
 pyautogui.PAUSE = 0.01
-
-
 
 
 # -------------------------------------------------------------------------------------------
@@ -60,7 +59,7 @@ def screen_shot(monitor):
             time.sleep(0.1)
             os.system(row)
     else:  # 桌面截屏
-        #print(time.ctime())
+        # print(time.ctime())
         im = numpy.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
     return screen
@@ -68,30 +67,32 @@ def screen_shot(monitor):
 
 def touch(pos):
     x, y = pos
-    #print(pos)
+    # print(pos)
 
-    #pt = win32api.GetCursorPos()
-    #pt_x = pt[0]
-    #pt_y = pt[1]
+    # pt = win32api.GetCursorPos()
+    # pt_x = pt[0]
+    # pt_y = pt[1]
     pyautogui.moveTo(x, y)
     pyautogui.click(x, y)
+
+
 '''
     win32api.mouse_event(0x0001, x - pt_x, y - pt_y, 0, 0)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x - pt_x, y - pt_y, 0, 0)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, x - pt_x, y - pt_y, 0, 0)
 '''
 
-
-
 '''
     ghub.mouse_xy((x - pt_x), (y - pt_y))
     ghub.mouse_down(1)
     ghub.mouse_up(1)
 '''
+
+
 def touch_p(pos, offset):
     x, y = pos
-    #print(pos)
-    #pt = win32api.GetCursorPos()
+    # print(pos)
+    # pt = win32api.GetCursorPos()
     y = y + offset
     pyautogui.moveTo(x, y)
     pyautogui.click(x, y)
@@ -176,7 +177,7 @@ def left_offset(p):
     return y
 
 
-def random_delay(x=1.5, y=1.7):
+def random_delay(x=2, y=2.4):
     t = random.uniform(x, y)
     time.sleep(t)
 
@@ -228,7 +229,7 @@ def find_touch(target, monitor, tap=True):
             random_delay()
         return xx
     else:
-        #print('N 未找到目標 ', target)
+        # print('N 未找到目標 ', target)
         return False
 
 
@@ -246,7 +247,7 @@ def find_touch_unrand(target, monitor, tap=True):
             random_delay()
         return xx
     else:
-        #print('N 未找到目標 ', target)
+        # print('N 未找到目標 ', target)
         return False
 
 
@@ -265,7 +266,7 @@ def find_touch_moveleft(target, monitor, tap=True):
             random_delay()
         return xx
     else:
-        #print('N 未找到目標 ', target)
+        # print('N 未找到目標 ', target)
         return False
 
 
@@ -280,6 +281,7 @@ def time_todo():
         print("NO")
     time.sleep(2)
 
+
 def time_crash():
     now_time = time.strftime("%H:%M:%S", time.localtime())
     now_time = Interval.between(now_time, now_time)
@@ -289,26 +291,71 @@ def time_crash():
     else:
         print("NO")
     time.sleep(2)
-'''
-    只偵測血瓶那一塊區域(修改monitor的範圍)
-    if 找到0時:   
-        if 同時找到1~9 的話:
-            break
-        else:
-            做後續回程買藥的動作
-        
-'''
-'''
-古魯丁四樓被打
-飛走
-地監
-移動到2-3
-省電
 
+def grabPic():
+    bbox = (150, 75, 470, 95)
+    img = ImageGrab.grab(bbox)
+    img.save("pixel.png")
 
-2-3被打
-飛走
-地監
-4樓
-省電
-'''
+def PerOfBlood():
+    bbox = (150, 75, 470, 95)
+    img = np.array(ImageGrab.grab(bbox))
+    cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
+    imgShape = img.shape
+    # 获取像素坐标（5，H/2）的BGR值
+    imgHeightHalf = int(imgShape[0] / 2)
+    BGR = np.array([img[imgHeightHalf][5][0], img[imgHeightHalf][5][1], img[imgHeightHalf][5][2]])
+    #print(BGR)
+
+    B = int(BGR[0])
+    G = int(BGR[1])
+    R = int(BGR[2])
+
+    # 寻找合适的上浮范围  不得使 RGB 值高于 255
+    upRange = 20
+    if 255 - B < upRange:
+        upRange = 255 - B
+    if 255 - G < upRange:
+        upRange = 255 - G
+    if 255 - R < upRange:
+        upRange = 255 - R
+
+    # 寻找合适的下浮范围值 不得使 RGB 值低于 0
+    lowRange = 40
+    if B - lowRange < 0:
+        lowRange = B
+    if G - lowRange < 0:
+        lowRange = G
+    if R - lowRange < 0:
+        lowRange = R
+
+    # print('upRange == ',upRange)
+    # print('lowRange ==',lowRange)
+    upper = BGR + upRange
+    lower = BGR - lowRange
+
+    # 确定要检测的颜色范围
+    mask = cv2.inRange(img, lower, upper)
+    (contours, hierarchy) = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    #print('number of countours: %d' % (len(contours)))
+
+    # ================================= 测试检测范围的代码 =============================
+
+    # 找到绘画轮廓 水平方向最大值
+    originXMax = 0
+    for pointArray in contours:
+        for x in pointArray:
+            for y in x:
+                for originX in y:
+                    if originXMax < originX:
+                        originXMax = originX
+
+    #print('originXMax == ', originXMax)
+
+    # 根据图片的大小判断，目前血量所占的 百分比
+    imgShape = img.shape
+    imgWidth = imgShape[1]
+    bloodPer = (originXMax - 8) / imgWidth
+    bloodPer = format(bloodPer, '.2f')
+    print(bloodPer)
+    return bloodPer
